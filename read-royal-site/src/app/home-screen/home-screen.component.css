@@ -1,0 +1,101 @@
+.container{
+    margin-top: 20px;
+    width: 80%; 
+    height: fit-content;
+    background-color: grey;
+    
+}
+
+
+
+.spacer{
+background-color: #ff530d;
+padding: 4px 15px 7px 30px;
+    font: 300 15px Open Sans,Tahoma,Geneva,sans-serif;
+    color: #fff;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 170px;
+}
+
+.recentSpacer{
+    background-color: #ff530d;
+    padding: 4px 15px 7px 30px;
+        font: 300 15px Open Sans,Tahoma,Geneva,sans-serif;
+        color: #fff;
+        top: 0;
+        left: 0;
+        display: block;
+        width: 100%;
+    }
+
+    .infoStories{
+display: flex;
+    }
+    
+    .updatedStories{
+        margin: 0px 0px 0px 230px;
+        display: grid;
+    background-color: green;
+    height: fit-content;
+    width: 500px;
+    }
+
+.randomStories{
+
+    background-color: green;
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+
+}
+
+.randomStory{
+    display: block;
+    margin: auto;  
+    border: 1px solid black;   
+}
+
+.randomStories img{
+    width: 120px;
+    height: 160px;
+}
+.randomTitle{
+    margin: 0px 0px 0px 0px;
+   
+}
+.mySlides{
+    margin-bottom: 20px;
+}
+
+
+.recentStories{
+    display: grid;
+    background-color: green;
+    height: fit-content;
+    width: 500px;
+}
+.recentSlides {
+    width:30%;
+    margin: 0px 10px 0px 30px;
+
+}
+.recentStory{
+    
+    border: 1px solid black;
+
+}
+.recentStory img{
+    display: block; 
+    margin: auto;
+}
+.recentTitle{
+    margin: 0px 0px 0px 0px;
+    text-align: center;
+}
+
+.centering{
+    display: flex;
+}
