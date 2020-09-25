@@ -10,6 +10,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HomeScreenComponent } from './home-screen/home-screen.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
