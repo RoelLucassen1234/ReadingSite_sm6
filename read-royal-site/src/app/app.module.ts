@@ -9,6 +9,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeScreenComponent } from './home-screen/home-screen.component';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { fakeBackendProvider, JwtInterceptor, ErrorInterceptor } from './_helpers';
+import { HomeComponent } from './home';
+import { LoginComponent } from './login';
+import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -16,16 +22,27 @@ import { LoginPageComponent } from './login-page/login-page.component';
     AppComponent,
     NavbarComponent,
     HomeScreenComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    HomeComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
+    RouterModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    MatToolbarModule
+    MatToolbarModule,
+    HttpClientModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+
+    // provider used to create fake backend
+    fakeBackendProvider
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
