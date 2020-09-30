@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatToolbarModule, MatToolbar} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,7 +14,9 @@ import { fakeBackendProvider, JwtInterceptor, ErrorInterceptor } from './_helper
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';
 import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RegisterComponent } from './register/register.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 
 @NgModule({
@@ -24,7 +26,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     HomeScreenComponent,
     LoginPageComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -34,8 +37,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatButtonModule,
     MatToolbarModule,
     HttpClientModule,
+    MatFormFieldModule,
+    FormsModule,
     ReactiveFormsModule
+  ], exports : [
+    MatToolbar
   ],
+
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

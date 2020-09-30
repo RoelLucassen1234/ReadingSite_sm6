@@ -1,0 +1,41 @@
+
+
+.loginform{
+    padding: 15px 25px;
+}
+
+
+mat-card{
+    width: 300px;
+    margin: auto;
+    padding: 0;
+}
+.button-group{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
+.page-container{
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
+.fancy-column{
+    padding: 10px;
+    border-radius: 4px 4px 0 0;
+
+}
+
+.register-group{
+    margin-top: 20px;
+}
+
+.register-link{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+
+   
+}
