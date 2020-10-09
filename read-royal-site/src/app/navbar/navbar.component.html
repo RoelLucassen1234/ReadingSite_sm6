@@ -1,8 +1,13 @@
 <mat-toolbar>
     <span>My Application</span>
 <div class="spacer"></div>
+<div *ngIf="filtersLoaded | async">
     <a href="/home" mat-button > Home </a>
-    <a mat-button> About us </a>
-    <a mat-raised-button color="accent" href="/login"> Login </a>
+    <a *ngIf="this.verified && this.isRole == 'Admin' " mat-raised-button color="accent" href="/login"> Check user accounts </a>
+    <a *ngIf="this.verified" mat-button  href="/login"> Your stories </a>
+    <a *ngIf="this.verified && this.isRole == 'User' " mat-button  href="/login"> Followed Stories </a>
+    <a *ngIf="!this.verified" mat-raised-button color="accent" href="/login"> Login </a>
+    <a *ngIf="this.verified" mat-raised-button color="accent" (click)="logout()" href="/login"> Log out </a>
 
+</div>
   </mat-toolbar>

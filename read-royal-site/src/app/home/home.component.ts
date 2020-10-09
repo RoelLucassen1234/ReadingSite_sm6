@@ -4,13 +4,14 @@ import { first } from 'rxjs/operators';
 import { User } from '../models';
 import { AuthenticationService } from '../services/authentication.service';
 import { UserService } from '../services/user.service';
+import { JWT } from '../models/jwt';
 
 
 @Component({ templateUrl: 'home.component.html' })
 export class HomeComponent {
     loading = false;
-    user: User;
-    userFromApi: User;
+    user: JWT;
+    userFromApi: JWT;
 
     constructor(
         private userService: UserService,
@@ -20,10 +21,6 @@ export class HomeComponent {
     }
 
     ngOnInit() {
-        this.loading = true;
-        this.userService.getById(this.user.id).pipe(first()).subscribe(user => {
-            this.loading = false;
-            this.userFromApi = user;
-        });
+
     }
 }

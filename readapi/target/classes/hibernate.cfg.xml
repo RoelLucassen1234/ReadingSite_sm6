@@ -27,7 +27,7 @@ root
         <property name="hbm2ddl.auto">update</property>
 
 
-        <mapping class="model.User"/>
+        <mapping class="nl.roellucassen.readroyal.api.model.User"/>
 
 
 

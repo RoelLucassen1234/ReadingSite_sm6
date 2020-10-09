@@ -15,6 +15,8 @@ import reactor.core.publisher.Mono;
 import tech.mednikov.webflux2fademo.errors.InvalidTokenException;
 
 import java.security.interfaces.RSAPublicKey;
+import java.time.Instant;
+import java.util.Date;
 import java.util.UUID;
 
 @Component("TokenManager")
@@ -43,6 +45,7 @@ public class TokenManagerImpl implements TokenManager{
         }
     }
 
+
     @Override
     public Mono<String> parse(String token) {
         try {
@@ -51,6 +54,10 @@ public class TokenManagerImpl implements TokenManager{
             JWSVerifier verifier = new RSASSAVerifier(publicKey);
             boolean success = signedJWT.verify(verifier);
             if (success){
+                Date expirationDate = signedJWT.getJWTClaimsSet().getExpirationTime();
+                if (expirationDate.before(Date.from(Instant.now()))) {
+                    return Mono.error(InvalidTokenException::new);
+                }
                 String userId = signedJWT.getJWTClaimsSet().getSubject();
                 return Mono.just(userId);
             } else {

@@ -38,10 +38,10 @@ export class RegisterComponent implements OnInit {
 
   ) {
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
+      username: ['', Validators.compose( [Validators.required, Validators.pattern("^[a-zA-Z0-9]$")])],
       email: ['', Validators.required],
-      password: ['', Validators.required],
-      confirmPassword: ['', Validators.required],
+      password: ['',  [ Validators.required, Validators.pattern("[A-Za-z0-9\-\_\#\@\!\^\&\*\(\)]+")]],
+      confirmPassword: ['', [Validators.required]],
 
     }), { validator: this.checkPasswords(this.loginForm) };
   }
