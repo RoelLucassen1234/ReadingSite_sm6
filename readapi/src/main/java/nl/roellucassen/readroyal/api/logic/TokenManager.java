@@ -1,9 +1,11 @@
 package nl.roellucassen.readroyal.api.logic;
 
 
+import nl.roellucassen.readroyal.api.model.User;
+
 public interface TokenManager {
 
     String issueToken(String userId, String userRole);
 
-    String parse(String token);
+    User parse(String token);
 }

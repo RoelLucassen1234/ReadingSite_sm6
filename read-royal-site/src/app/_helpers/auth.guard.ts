@@ -14,8 +14,13 @@ export class AuthGuard implements CanActivate {
         const user = this.authenticationService.userValue;
         console.log(user);
         if (user) {
+            console.log("User is not empty");
+            console.log("User role :" + user.role);
             // check if route is restricted by role
-            if (route.data.roles && route.data.roles.indexOf(user.rank) === -1) {
+            console.log("route data roles:" + route.data.roles);
+            console.log("Index of user role: " + route.data.roles.indexOf(user.role))
+            if (route.data.roles && route.data.roles.indexOf(user.role) === -1) {
+                
                 // role not authorised so redirect to home page
                 this.router.navigate(['/']);
                 return false;
@@ -24,9 +29,10 @@ export class AuthGuard implements CanActivate {
             // authorised so return true
             return true;
         }
+     
 
         // not logged in so redirect to login page with the return url
-        this.router.navigate(['/home'], { queryParams: { returnUrl: state.url } });
+       this.router.navigate(['/home']);
         return false;
     }
 }

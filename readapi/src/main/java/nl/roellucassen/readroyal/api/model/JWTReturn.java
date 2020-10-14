@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class JWTReturn {
     private Date expiresAt;
-    private String rank;
+    private String role;
     private String token;
     private String username;
 
@@ -13,7 +13,7 @@ public class JWTReturn {
     }
 
     public JWTReturn(String rank, Date expiresAt, String token, String username) {
-        this.rank = rank;
+        this.role = rank;
         this.expiresAt = expiresAt;
         this.token = token;
         this.username = username;
@@ -36,12 +36,12 @@ public class JWTReturn {
         this.expiresAt = expiresAt;
     }
 
-    public String getRank() {
-        return rank;
+    public String getRole() {
+        return role;
     }
 
-    public void setRank(String rank) {
-        this.rank = rank;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getToken() {

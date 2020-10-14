@@ -25,9 +25,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic().disable()
                 .addFilterBefore(new AuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
+                .antMatchers("/users").permitAll()
+                .antMatchers("/users/**").hasRole("Admin")
                 .antMatchers("/auth").permitAll()
                 .antMatchers("/auth/verify/").permitAll()
-                .antMatchers("/admin").hasRole("ADMIN")
+                .antMatchers("/admin").hasRole("Admin")
                 .anyRequest().authenticated();
 
     }

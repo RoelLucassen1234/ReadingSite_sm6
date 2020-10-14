@@ -9,45 +9,46 @@ import { AuthenticationService } from '../services/authentication.service';
 export class NavbarComponent implements OnInit {
 
   filtersLoaded: Promise<boolean>;
-  verified : Boolean;
-  isRole : String;
+  verified: Boolean;
+  isRole: String;
   username: String;
-  constructor(private authenticationservice : AuthenticationService) { }
+  constructor(private authenticationservice: AuthenticationService) { }
 
   ngOnInit(): void {
-   console.log(this.authenticationservice.userValue)
-   this.filtersLoaded = Promise.resolve(false);
-    if(this.authenticationservice.userValue != null)
-    this.authenticationservice.verify().subscribe(data => {
-      this.verified = data;
-      console.log(this.verified);
-      this.update();
-    });
-    else{
+    console.log(this.authenticationservice.userValue)
+    console.log("dsad");
+    this.filtersLoaded = Promise.resolve(false);
+    if (this.authenticationservice.userValue != null)
+      this.authenticationservice.verify().subscribe(data => {
+        this.verified = data;
+        console.log(this.verified);
+        this.update();
+      });
+    else {
       this.update();
     }
   }
 
-  logout(){
+  logout() {
     this.authenticationservice.logout();
   }
 
-  update(){
-
-    if(this.verified){
+  update() {
+console.log(this.verified);
+    if (this.verified) {
       const user = this.authenticationservice.userValue;
-      console.log(user.rank);
-      console.log(user.username);
-      console.log(user.username);
-      this.isRole = user.rank;
- console.log("Verified");
+      this.isRole = user.role;
 
-    }else{
+      console.log("Verified");
+
+    } else {
+
+
       this.logout();
-console.log("Not Verified");
+      console.log("Not Verified");
     }
     this.filtersLoaded = Promise.resolve(true);
   }
-  
+
 
 }

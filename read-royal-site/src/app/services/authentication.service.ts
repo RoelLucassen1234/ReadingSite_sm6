@@ -2,7 +2,7 @@
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
 import { User } from '../models/user';
@@ -30,11 +30,10 @@ export class AuthenticationService {
     login(username: string, password: string) {
         
         return this.http.post<any>(`${environment.apiUrl}/auth`, { username, password })
-            .pipe(map(user  => {
-               
-             
-                // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('user', JSON.stringify(user));
+            .pipe(map(user  => { 
+            // store user details and jwt token in local storage to keep user logged in between page refreshes
+               console.log(user);
+            localStorage.setItem('user', JSON.stringify(user));
                 this.userSubject.next(user);
                 return user;
             }));
@@ -43,15 +42,17 @@ export class AuthenticationService {
     verify(){
       
      //  console.log(`${environment.apiUrl}/auth/verify/` + this.userValue.token);
-    
-       return this.http.get<any>(`${environment.apiUrl}/auth/verify/` + this.userValue.token);
+       return this.http.get<any>(`${environment.apiUrl}/auth/verify/` + this.userValue.token).pipe(
+       
+       )
    
     }
 
     logout() {
         // remove user from local storage to log user out
+        
         localStorage.removeItem('user');
         this.userSubject.next(null);
-        this.router.navigate(['/login']);
+       // this.router.navigate(['/login']);
     }
 }

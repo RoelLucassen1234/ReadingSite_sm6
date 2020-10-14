@@ -1,7 +1,8 @@
+import { Role } from './role';
+
 export class JWT {
     token: string;
     expiresAt: Date;
-    rank: String;
-    username : String;
-    
+    role: Role;
+    username : String;  
 }

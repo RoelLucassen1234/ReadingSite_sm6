@@ -1,6 +1,7 @@
 package nl.roellucassen.readroyal.api.config;
 
 import nl.roellucassen.readroyal.api.logic.Factory;
+import nl.roellucassen.readroyal.api.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 public class AuthenticationFilter extends OncePerRequestFilter {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -26,23 +28,28 @@ public class AuthenticationFilter extends OncePerRequestFilter {
         String header = httpServletRequest.getHeader("Authorization");
 
         if (header == null) {
-filterChain.doFilter(httpServletRequest, httpServletResponse);
+            filterChain.doFilter(httpServletRequest, httpServletResponse);
         } else {
             final String jwttoken = header.replace("Bearer ", "");
-            if (jwttoken == null || Factory.getInstance().parse(jwttoken) == null) {
-                httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "The token is not valid.");
-                filterChain.doFilter(httpServletRequest, httpServletResponse);
+
+            if (jwttoken == null) {
+                httpServletResponse.setStatus(403);
+            } else {
+                User user = Factory.getInstance().parse(jwttoken);
+                if (user == null) {
+                    httpServletResponse.setStatus(401);
+                } else {
+                    // TODO get this from auth request
+                    List<String> authorities = new ArrayList<>();
+                    authorities.add(user.getRole());
+                    // Authenticate the user
+                    UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(user.getId(), null, authorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList()));
+                    SecurityContextHolder.getContext().setAuthentication(auth);
+                    this.logger.info("Authenticated: " + SecurityContextHolder.getContext().getAuthentication().isAuthenticated());
+                }
             }
 
-            final String userId = Factory.getInstance().parse(jwttoken);
 
-            // TODO get this from auth request
-            List<String> authorities = new ArrayList<>();
-            authorities.add("ROLE_USER");
-            // Authenticate the user
-            UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(userId, null, authorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList()));
-            SecurityContextHolder.getContext().setAuthentication(auth);
-            this.logger.info("Authenticated: " + SecurityContextHolder.getContext().getAuthentication().isAuthenticated());
             filterChain.doFilter(httpServletRequest, httpServletResponse);
         }
 

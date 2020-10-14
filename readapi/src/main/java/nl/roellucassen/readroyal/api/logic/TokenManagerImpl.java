@@ -8,6 +8,7 @@ import com.nimbusds.jose.jwk.gen.RSAKeyGenerator;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
 import nl.roellucassen.readroyal.api.exception.JWTExpirationException;
+import nl.roellucassen.readroyal.api.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -52,7 +53,7 @@ public class TokenManagerImpl implements TokenManager {
     }
 
     @Override
-    public String parse(String token) {
+    public User parse(String token) {
         try {
             SignedJWT signedJWT = SignedJWT.parse(token);
             RSAPublicKey publicKey = key.toRSAPublicKey();
@@ -65,7 +66,10 @@ public class TokenManagerImpl implements TokenManager {
                 }
                 String userRole = signedJWT.getJWTClaimsSet().getStringClaim("User_Role");
                 String userId = signedJWT.getJWTClaimsSet().getSubject();
-                return userId;
+                User user = new User();
+                user.setRole(userRole);
+                user.setId((Long.parseLong(userId)));
+                return user;
             } else {
                 logger.info("The jwttokensignature has changed. This token is invalid");
                 return null;

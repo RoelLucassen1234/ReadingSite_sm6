@@ -31,17 +31,16 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
     private router: Router,
     private userService : UserService
 
 
   ) {
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.compose( [Validators.required, Validators.pattern("^[a-zA-Z0-9]$")])],
+      username: ['', Validators.required],
       email: ['', Validators.required],
-      password: ['',  [ Validators.required, Validators.pattern("[A-Za-z0-9\-\_\#\@\!\^\&\*\(\)]+")]],
-      confirmPassword: ['', [Validators.required]],
+      password: ['',   Validators.required],
+      confirmPassword: ['', Validators.required]
 
     }), { validator: this.checkPasswords(this.loginForm) };
   }
@@ -79,7 +78,7 @@ if (!this.notsame) {
           error => {
             this.error = error;
             if(error == "OK"){
-              this.router.navigate(['/login']);
+            
             }
 
             this.loading = false;
