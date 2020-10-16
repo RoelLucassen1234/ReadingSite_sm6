@@ -1,16 +1,24 @@
 package nl.roellucassen.readroyal.api.presentation.RestControllers;
 
 
+import nl.roellucassen.readroyal.api.exception.AuthenticationException;
+import nl.roellucassen.readroyal.api.exception.JWTExpirationException;
+import nl.roellucassen.readroyal.api.exception.RegisterException;
 import nl.roellucassen.readroyal.api.logic.AuthLogic;
 import nl.roellucassen.readroyal.api.logic.Factory;
 import nl.roellucassen.readroyal.api.model.JWTReturn;
 import nl.roellucassen.readroyal.api.model.User;
+import nl.roellucassen.readroyal.api.model.UserView;
 import nl.roellucassen.readroyal.api.presentation.view.LoginViewModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.net.URI;
 
 
 @CrossOrigin()
@@ -25,29 +33,46 @@ public class AuthController {
     @PostMapping("")
     public ResponseEntity authenticate(@RequestBody LoginViewModel loginViewModel) {
 
-        JWTReturn token = logic.auth(loginViewModel);
-        if (token != null) {
-            System.out.println(token);
+        try {
+            JWTReturn token = logic.auth(loginViewModel);
             return ResponseEntity.ok(token);
-        } else
-            return ResponseEntity.status(401).body("Not Authorized.");
+        } catch (AuthenticationException ex) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ex.getMessage(), ex);
+        } catch (Exception ex) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Something went wrong", ex);
+        }
+
+
+    }
+
+    @PostMapping("/user")
+    public ResponseEntity postUser(@RequestBody UserView userView) {
+
+        try {
+            Long id = logic.postUser(userView);
+            return ResponseEntity.created(new URI("/user/" + id)).build();
+
+        } catch (RegisterException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage(), e);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Something went wrong", e);
+        }
 
     }
 
 
     @GetMapping("/verify/{token}")
     public ResponseEntity verify(@PathVariable String token) {
-      User user = Factory.getInstance().parse(token);
-        if (token != null) {
-            if (user != null) {
-                logger.info("Userid " + user.getId() + " succesfully verified");
 
-                return ResponseEntity.ok(true);
-            }
+        //TODO Return user with the token instead of a boolean
+        try {
+            return ResponseEntity.ok(Factory.getInstance().parse(token));
+        } catch (JWTExpirationException ex) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ex.getMessage(), ex);
+        } catch (Exception ex) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Something went wrong", ex);
+        }
 
-        }else
-            logger.warn("Attempted to verify without token");
 
-        return ResponseEntity.status(401).body(false);
     }
 }

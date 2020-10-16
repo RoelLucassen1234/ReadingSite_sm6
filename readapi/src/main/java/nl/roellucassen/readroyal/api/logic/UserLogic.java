@@ -1,10 +1,9 @@
 package nl.roellucassen.readroyal.api.logic;
 
-import nl.roellucassen.readroyal.api.data.UserData;
 import nl.roellucassen.readroyal.api.data.UserRepository;
+import nl.roellucassen.readroyal.api.exception.AuthenticationException;
+import nl.roellucassen.readroyal.api.exception.RoleException;
 import nl.roellucassen.readroyal.api.model.User;
-import nl.roellucassen.readroyal.api.model.UserView;
-import org.mindrot.jbcrypt.BCrypt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,59 +17,35 @@ public class UserLogic {
     @Autowired
     private UserRepository userRepository;
 
-    UserData userData;
+
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public UserLogic() {
-        this.userData = new UserData();
+
     }
 
-    public String postUser(UserView userView) {
-        User user;
-        String error = "Something went wrong";
-        if (userView != null)
-            if (userData.getUserByEmail(userView.getEmail()) == null) {
-                if (userView.getPassword() != null) {
-                    if (userView.getPassword().length() > 5) {
-                        if (userView.getUsername() != null) {
-                            if (userView.getUsername().length() > 5) {
-                                String gensalt = BCrypt.gensalt();
-                                String pw_hash = BCrypt.hashpw(userView.getPassword(), gensalt);
-                                user = new User();
-                                user.setRole(userView.getRole());
-                                user.setEmail(userView.getEmail());
-                                user.setUsername(userView.getUsername());
-                                user.setPassword_hash(pw_hash);
-                                user.setPassword_salt(gensalt);
-                                userRepository.save(user);
 
-                                return "OK";
-                            } else {
-                                error = "Username is too short, should be at least 5 characters but is: " + userView.getUsername().length();
-                            }
-                        } else
-                            error = "No username";
-                    } else
-                        error = "Password is too short, should be at least 5 characters but is:" + userView.getPassword().length();
-                } else
-                    error = "No password";
-            } else
-                error = "Email already in use";
-
-        logger.info("Tried to register new user with invalid credentials. The error:" + error);
-        return error;
-    }
-
-    public List<User> getUsers(String token) {
+    public List<User> getUsers(String token) throws RoleException, AuthenticationException, Exception {
         logger.info("userToken: " + token + " has requested all the users");
         User user = Factory.getInstance().parse(token);
 
-        if (user != null) {
-            logger.info("Userid:" + user.getId() + " has succesfully received all the users");
-            return userRepository.findAll();
+        if (!(user != null)) {
+            logger.warn("Someone without the corresponding authorization is trying to pull the information of all the users. Token used: " + token);
+            throw new AuthenticationException("Invalid Token");
         }
-        logger.warn("Someone without the corresponding authorization is trying to pull the information of all the users. Token used: " + token);
-        return null;
+
+        if (!(user.getRole().equals("Admin"))) {
+            logger.warn("User is trying to pull users that require administration rights");
+            throw new RoleException("You do not have the right authorization to do this.");
+        }
+
+        logger.info("Userid:" + user.getId() + " has succesfully received all the users");
+        return userRepository.findAll();
+    }
+
+    public void deleteUser(String id) {
+        userRepository.deleteById(Long.parseLong(id));
+        logger.info("User with userId: " + id + " has succesfully been deleted");
     }
 
 

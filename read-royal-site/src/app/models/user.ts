@@ -6,4 +6,6 @@ export class User {
     id : number;
     token?: string;
     role : Role;
+    password_hash?: string;
+    password_salt? : string;
 }

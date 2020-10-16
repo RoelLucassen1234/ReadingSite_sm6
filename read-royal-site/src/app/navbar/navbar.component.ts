@@ -16,11 +16,11 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.authenticationservice.userValue)
-    console.log("dsad");
+
     this.filtersLoaded = Promise.resolve(false);
     if (this.authenticationservice.userValue != null)
       this.authenticationservice.verify().subscribe(data => {
-        this.verified = data;
+        this.verified = true;
         console.log(this.verified);
         this.update();
       });
@@ -34,16 +34,13 @@ export class NavbarComponent implements OnInit {
   }
 
   update() {
-console.log(this.verified);
+
     if (this.verified) {
       const user = this.authenticationservice.userValue;
       this.isRole = user.role;
-
       console.log("Verified");
 
     } else {
-
-
       this.logout();
       console.log("Not Verified");
     }

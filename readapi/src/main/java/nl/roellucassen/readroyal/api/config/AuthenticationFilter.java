@@ -1,5 +1,6 @@
 package nl.roellucassen.readroyal.api.config;
 
+import lombok.SneakyThrows;
 import nl.roellucassen.readroyal.api.logic.Factory;
 import nl.roellucassen.readroyal.api.model.User;
 import org.slf4j.Logger;
@@ -22,6 +23,8 @@ import java.util.stream.Collectors;
 public class AuthenticationFilter extends OncePerRequestFilter {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+
+    @SneakyThrows
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
 
@@ -35,6 +38,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
             if (jwttoken == null) {
                 httpServletResponse.setStatus(403);
             } else {
+
                 User user = Factory.getInstance().parse(jwttoken);
                 if (user == null) {
                     httpServletResponse.setStatus(401);

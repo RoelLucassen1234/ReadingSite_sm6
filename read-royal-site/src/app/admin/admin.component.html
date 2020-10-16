@@ -1,11 +1,29 @@
 ﻿<div class="card mt-4">
     <h4 class="card-header">Admin</h4>
-    <div class="card-body">
+    <div class="card-body" style="text-align: center;">
         <p>This page can be accessed <u>only by administrators</u>.</p>
         <p class="mb-1">All users from secure (admin only) api end point:</p>
-        <!-- <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
-        <ul *ngIf="users">
-            <li *ngFor="let user of users">{{user.firstName}} {{user.lastName}}</li>
-        </ul> -->
+        <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div> 
+        <div>
+        <table > 
+           <tr> 
+               <th> Id </th>
+               <th> Username </th>
+               <th> Email </th>
+               <th> Role </th>
+               <th> Hash </th>
+               <th> Salt </th>
+               <th> Actions</th>
+            <tr *ngFor="let user of users" [attr.id]="user.id">
+                <td>{{user.id}}</td>
+                <td> {{user.username}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.role}}</td>
+                <td>{{user.password_hash}}</td>
+                <td>{{user.password_salt}}</td>
+            <td><button type="button" (click)="deleteUser(user.id)">Delete</button></td>
+        </tr>
+        </table>
+    </div>
     </div>
 </div>

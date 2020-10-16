@@ -27,8 +27,6 @@ export class UserService {
         this.user.password = password;
  
         
-        
-        console.log(this.restServer.getRestUrl() + '/users')
-        return this.http.post(this.restServer.getRestUrl() + '/users', this.user);
+        return this.http.post(this.restServer.getRestUrl() + '/auth/user', this.user);
       }
 }

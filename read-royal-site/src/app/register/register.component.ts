@@ -73,21 +73,22 @@ if (!this.notsame) {
       this.userService.register(this.f.email.value, this.f.password.value, this.f.username.value, Role.User)
       .subscribe(
           data => {
-            this.router.navigate(['/login']);
+            
+          //  this.router.navigate(['/login']);
+          this.loading = false;
+            console.log("ssss");
           },
           error => {
-            this.error = error;
-            if(error == "OK"){
             
-            }
-
-            this.loading = false;
+            this.error = error;    
+             this.loading = false;
           });
     }else{
       
         this.error = "Make sure that password and confirm password match"
       
     }
+    this.loading = false;
   }
 
 

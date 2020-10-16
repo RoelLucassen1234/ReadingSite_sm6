@@ -28,8 +28,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/users").permitAll()
                 .antMatchers("/users/**").hasRole("Admin")
                 .antMatchers("/auth").permitAll()
+                .antMatchers("/auth/user").permitAll()
                 .antMatchers("/auth/verify/").permitAll()
                 .antMatchers("/admin").hasRole("Admin")
+                .antMatchers("/admin/user/delete").hasRole("Admin")
                 .anyRequest().authenticated();
 
     }
