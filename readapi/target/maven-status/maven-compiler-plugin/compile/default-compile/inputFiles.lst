@@ -9,7 +9,6 @@ D:\git projects\ReadingSite_sm6\readapi\src\main\java\nl\roellucassen\readroyal\
 D:\git projects\ReadingSite_sm6\readapi\src\main\java\nl\roellucassen\readroyal\api\config\SwaggerConfig.java
 D:\git projects\ReadingSite_sm6\readapi\src\main\java\nl\roellucassen\readroyal\api\presentation\RestControllers\AdminController.java
 D:\git projects\ReadingSite_sm6\readapi\src\main\java\nl\roellucassen\readroyal\api\presentation\view\LoginViewModel.java
-D:\git projects\ReadingSite_sm6\readapi\src\main\java\nl\roellucassen\readroyal\api\data\UserData.java
 D:\git projects\ReadingSite_sm6\readapi\src\main\java\nl\roellucassen\readroyal\api\presentation\RestControllers\AuthController.java
 D:\git projects\ReadingSite_sm6\readapi\src\main\java\nl\roellucassen\readroyal\api\exception\RoleException.java
 D:\git projects\ReadingSite_sm6\readapi\src\main\java\nl\roellucassen\readroyal\api\logic\UserLogic.java
