@@ -1,4 +1,11 @@
-FROM maven:3-jdk-11
-VOLUME /tmp
-COPY target/*.jar app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+FROM maven:3-jdk-11 AS build
+COPY src /home/app/src
+COPY pom.xml /home/app
+RUN mvn -f /home/app/pom.xml clean package
+COPY /home/app/target/*.jar app.jar
+
+
+FROM openjdk:11
+COPY --from=build /home/app/target/app.jar /usr/local/lib/app.jar
+EXPOSE 8081
+ENTRYPOINT ["java","-jar","/usr/local/lib/app.jar"]
