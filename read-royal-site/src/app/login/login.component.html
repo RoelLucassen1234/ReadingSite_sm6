@@ -8,10 +8,11 @@
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+                    <input type="text"minlength="5" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
                     <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
                         <div *ngIf="f.username.errors.required">Username is required</div>
                         <div *ngIf="f.username.errors?.pattern">Use only numbers or letters, no special characters allowed</div>
+                        <div *ngIf = "f.username.errors?.minlength"> Username should at least be 5 characters long</div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -26,7 +27,7 @@
                     <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                     Login
                 </button>
-                <a href="/register" style="margin-left: 50px;">dont have an account? click here</a>
+                <a  [routerLink]="'/register'" style="margin-left: 50px;">dont have an account? click here</a>
                 <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
             </form>
         </div>

@@ -25,8 +25,7 @@ export class UserService {
         this.user.role = role;
         this.user.email = email;
         this.user.password = password;
- 
-        
-        return this.http.post(this.restServer.getRestUrl() + '/auth/user', this.user);
+
+        return this.http.post(`${environment.apiUrl}/auth/user`, this.user);
       }
 }

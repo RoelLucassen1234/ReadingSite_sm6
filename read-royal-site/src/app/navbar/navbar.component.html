@@ -1,13 +1,14 @@
 <mat-toolbar>
     <span>My Application</span>
 <div class="spacer"></div>
-<div *ngIf="filtersLoaded | async">
-    <a href="/home" mat-button > Home </a>
-    <a *ngIf="this.verified && this.isRole == 'Admin' " mat-raised-button color="accent" href="/admin"> Check user accounts </a>
-    <a *ngIf="this.verified" mat-button  href="/login"> Your stories </a>
-    <a *ngIf="this.verified && this.isRole == 'User' " mat-button  href="/login"> Followed Stories </a>
-    <a *ngIf="!this.verified" mat-raised-button color="accent" href="/login"> Login </a>
-    <a *ngIf="this.verified" mat-raised-button color="accent" (click)="logout()" href="/login"> Log out </a>
+<div *ngIf="filtersLoaded">
+    <a [routerLink]="'/home'" mat-button > Home </a>
+    <a [routerLink]= "['/profile', 1]" mat-button > Home </a>
+    <a *ngIf="this.verified && this.isRole == 'Admin' " mat-button [routerLink]="'/admin'"> Admin Controls </a>
+    <a *ngIf="this.verified" mat-button  [routerLink]="'/login'"> Your stories </a>
+    <a *ngIf="this.verified && this.isRole == 'User' " mat-button  [routerLink]="'/login'"> Followed Stories </a>
+    <a *ngIf="!this.verified" mat-raised-button color="accent" [routerLink]="'/login'"> Login </a>
+    <a *ngIf="this.verified" mat-raised-button color="accent" (click)="logout()" [routerLink]="'/home'">Log out </a>
 
 </div>
   </mat-toolbar>

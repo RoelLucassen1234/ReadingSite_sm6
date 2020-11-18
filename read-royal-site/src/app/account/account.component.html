@@ -1,0 +1,58 @@
+<div class="col-md-6 offset-md-3 mt-5">
+   
+    <div style="display: flex; justify-content: center;">
+        <div  *ngIf="url"><img [src]="url" style="width: 150px; height: 150px;"></div>   
+    </div>
+    <div class="card">
+       
+        <div class="card-body">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()"></form>
+        
+                <div class="formgroup"> 
+                    <label>Avatar image</label>
+                    <div style="display: flex;"> 
+                       
+                        <label class="btn btn-default">
+                            <input type="file" (change)="selectFile($event)" />
+                          </label>
+                    
+                         <div *ngIf="selectedFiles"> <button class="btn btn-success" (click)="uploadImage()"  [disabled]="!selectedFiles">
+                            Upload
+                          </button>
+                        </div>
+                    </div>
+                        </div>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text"minlength="5" value="{{this.profileView.username}}" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+                    <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                        <div *ngIf="f.username.errors.required">Username is required</div>
+                        <div *ngIf="f.username.errors?.pattern">Use only numbers or letters, no special characters allowed</div>
+                        <div *ngIf = "f.username.errors?.minlength"> Username should at least be 5 characters long</div>
+                    </div>
+                </div>
+            
+                <div class="form-group">
+                    <label for="email">Email</label>
+                  <input type="email" formControlName="email" value="{{this.profileView.email}}" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                  <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                      <div *ngIf="f.email.errors.required">Email is required</div>
+                  </div>
+              </div>
+              <div class="form-group">
+                <label for="bio">Description</label>
+              <input type="password" formControlName="bio"  value="{{this.profileView.description}}" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.bio.errors }" />
+              <div *ngIf="submitted && f.bio.errors" class="invalid-feedback">
+             
+              </div>
+          </div>
+                
+                <button  class="btn btn-primary">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Change account details
+                </button>
+                <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+            </form>
+        </div>
+    </div>
+</div>            

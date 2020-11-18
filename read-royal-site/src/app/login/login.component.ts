@@ -59,8 +59,11 @@ export class LoginComponent implements OnInit {
                 next: () => {
                     // get return url from query parameters or default to home page
         window.location.reload();
+        this.router.navigateByUrl("/home");
                 },
                 error: error => {
+                    console.log('error activated')
+                    console.log(error);
                     this.error = error;
                     this.loading = false;
                 }

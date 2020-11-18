@@ -12,7 +12,7 @@ import { JWT } from '../models/jwt';
 export class AuthenticationService {
     private userSubject: BehaviorSubject<JWT>;
     public user: Observable<JWT>;
-    token : String = "";
+    token : string = "";
     jwt : JWT;
     verified: boolean;
     constructor(
@@ -30,21 +30,30 @@ export class AuthenticationService {
     login(username: string, password: string) {
         
         return this.http.post<any>(`${environment.apiUrl}/auth`, { username, password })
-            .pipe(map(user  => { 
+            .pipe(map(jwt  => { 
             // store user details and jwt token in local storage to keep user logged in between page refreshes
-               console.log(user);
-            localStorage.setItem('user', JSON.stringify(user));
-                this.userSubject.next(user);
-                return user;
+            console.log("HEEEYO");  
+            console.log(jwt);
+               console.log("HEEEYO");
+            localStorage.setItem('user', JSON.stringify(jwt));
+           
+                this.userSubject.next(jwt);
+                console.log(localStorage.getItem('user'));
+                return jwt;
             }));
     }
 
     verify(){
       
      //  console.log(`${environment.apiUrl}/auth/verify/` + this.userValue.token);
-       return this.http.get<any>(`${environment.apiUrl}/auth/verify/` + this.userValue.token).pipe(
+       if(this.userValue != null){
+       return this.http.get<any>(`${environment.apiUrl}/auth/verify/` + this.userValue.token).pipe(map( jwt => {
+        localStorage.setItem('user', JSON.stringify(jwt));
+        this.userSubject.next(jwt);
+       })
        
        )
+    }
    
     }
 
@@ -53,6 +62,6 @@ export class AuthenticationService {
         
         localStorage.removeItem('user');
         this.userSubject.next(null);
-       // this.router.navigate(['/login']);
+    
     }
 }

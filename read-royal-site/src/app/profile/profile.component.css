@@ -1,0 +1,101 @@
+.content{
+    background: #313131;
+    
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+    
+}
+
+.avatar_image{
+    border-radius: 50%;
+    width: 150px;
+    height:150px;
+    display : block;
+    margin : auto;
+}
+
+.avatar_profile{
+ padding-top: 20px;
+height: 160px;
+}
+
+.avatar_stats{
+width: 100%;    
+position: relative;
+min-height: 1px;
+text-align: center;
+}
+
+.avatar_profile_stats{
+padding-top: 20px;
+    display: flex;
+justify-content: center;
+    height: 50px;
+}
+
+.avatar{
+    background: crimson;
+    width: auto;
+    height: 250px;
+}
+
+.amount_title{
+    font-size: 16px;
+    font-weight: 500;
+}
+.amount{
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0px;
+    color: #337ab7;
+}
+
+.username{
+    padding-top: 5px;
+    font-size: 25px;
+    font-weight: 400;
+    color: grey;
+}
+
+
+
+
+
+
+
+.informationTable{
+    background: #111;
+    color: hsla(0, 0%, 100%, .1);
+    border: 1px solid hsla(0, 0%, 100%, .1);
+    border-top: 1px solid #ddd;
+    width: fit-content;
+    margin: auto;
+   padding-top: 15px;
+    
+}
+
+.table {
+    border: 1px solid hsla(0, 0%, 100%, .1);
+    color: #ddd;
+}
+
+.table th{
+    border: 1px solid hsla(0, 0%, 100%, .1);
+}
+
+.table td{
+    border: 1px solid hsla(0, 0%, 100%, .1);
+}
+
+.caption{
+    text-align: center;
+    padding: 0;
+    min-height: 30px;
+    font-size: 18px;
+    border-bottom:  1px solid hsla(0, 0%, 100%, .1);
+}
+
+.caption-subject{
+    font-weight: 700!important;
+    color: whitesmoke;
+}

@@ -31,8 +31,7 @@ refresh(){
     this.adminService.getAll().pipe(first()).subscribe(users => {
         this.loading = false;
         this.users = users;
-        this.filtersLoaded = Promise.resolve(true);
-      
+        this.filtersLoaded = Promise.resolve(true);      
     });
 }
 deleteRow(id){

@@ -72,9 +72,8 @@ if (!this.notsame) {
       this.loading = true;
       this.userService.register(this.f.email.value, this.f.password.value, this.f.username.value, Role.User)
       .subscribe(
-          data => {
-            
-          //  this.router.navigate(['/login']);
+          data => {  
+          this.router.navigate(['/login']);
           this.loading = false;
             console.log("ssss");
           },
