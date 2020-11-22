@@ -1,7 +1,7 @@
 <mat-toolbar>
     <span>My Application</span>
 <div class="spacer"></div>
-<div *ngIf="filtersLoaded">
+
     <a [routerLink]="'/home'" mat-button > Home </a>
     <a [routerLink]= "['/profile', 1]" mat-button > Home </a>
     <a *ngIf="this.verified && this.isRole == 'Admin' " mat-button [routerLink]="'/admin'"> Admin Controls </a>
@@ -10,5 +10,5 @@
     <a *ngIf="!this.verified" mat-raised-button color="accent" [routerLink]="'/login'"> Login </a>
     <a *ngIf="this.verified" mat-raised-button color="accent" (click)="logout()" [routerLink]="'/home'">Log out </a>
 
-</div>
+
   </mat-toolbar>

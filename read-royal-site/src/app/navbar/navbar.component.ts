@@ -27,13 +27,18 @@ export class NavbarComponent implements OnInit {
   isVerifiedUser(){
     this.filtersLoaded = Promise.resolve(false);
     if (this.authenticationservice.userValue != null){
-    this.authenticationservice.verify().subscribe(data => {
+      const user = this.authenticationservice.userValue;
+      this.isRole = user.role;
       this.verified = true;
-      this.update();
-      console.log(this.verified);
-    });
+    }else{
+      this.verified = false;
+    }
+    // this.authenticationservice.verify().subscribe(data => {
+    //   this.verified = true;
+    //   this.update();
+    // });
   }
-  }
+  
 
   logout() {
     this.authenticationservice.logout();
@@ -51,7 +56,6 @@ export class NavbarComponent implements OnInit {
     }
     this.filtersLoaded = Promise.resolve(true);
   
-    console.log(this.isRole);
   }
 
 
