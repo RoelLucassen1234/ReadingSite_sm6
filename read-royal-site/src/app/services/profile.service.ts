@@ -9,7 +9,9 @@ import { User } from '../models/user';
 import { JWT } from '../models/jwt';
 import { AuthenticationService } from './authentication.service';
 import { AvatarSwap } from '../models/AvatarSwap';
-import { UpdateTokenView } from '../models/AvatarSwap copy';
+import { UpdateTokenView } from '../models/UpdateTokenView';
+import { UsernameSwap } from '../models/usernameSwap';
+import { BioSwap } from '../models/bioSwap';
 
 @Injectable({ providedIn: 'root' })
 export class ProfileService {
@@ -27,12 +29,18 @@ export class ProfileService {
     }
 
     saveAvatarImage(swap : AvatarSwap) {
-        return this.http.post<any>(`${environment.apiUrl}/profile/edit/avatar`, swap);
+        return this.http.post<any>(`${environment.apiUrl}/profile/edit/avatar`, swap)
 
       }
-    getAvatarImage() {
-   
-    }
+      saveUsername(swap : UsernameSwap) {
+        return this.http.post<any>(`${environment.apiUrl}/profile/edit/username`, swap);
+
+      }
+
+      saveBio(swap : BioSwap) {
+        return this.http.post<any>(`${environment.apiUrl}/profile/edit/description`, swap);
+
+      }
 
    
 }

@@ -19,7 +19,7 @@
                     <input type="text" formControlName="username"  minlength="5" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
                     <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
                         <div *ngIf="f.username.errors.required">Username is required</div>
-                         <div *ngIf = "f.password.errors?.minlength && !f.password.errors.required"> Password should at least be 5 long</div>
+                         <div *ngIf = "f.username.errors?.minlength && !f.username.errors.required"> Username should at least be 5 long</div>
                     </div>
                 </div>
                 <div class="form-group">

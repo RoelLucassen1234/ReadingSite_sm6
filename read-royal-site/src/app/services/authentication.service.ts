@@ -32,12 +32,8 @@ export class AuthenticationService {
         return this.http.post<any>(`${environment.apiUrl}/auth`, { username, password })
             .pipe(map(jwt  => { 
             // store user details and jwt token in local storage to keep user logged in between page refreshes
-            console.log("HEEEYO");  
-            console.log(jwt);
-               console.log("HEEEYO");
-            localStorage.setItem('user', JSON.stringify(jwt));
-           
-                this.userSubject.next(jwt);
+        
+                this.createJWT(jwt);
                 console.log(localStorage.getItem('user'));
                 return jwt;
             }));
@@ -54,8 +50,15 @@ export class AuthenticationService {
        
        )
     }
-   
+
+
     }
+
+    createJWT(jwt : any){
+        localStorage.setItem('user', JSON.stringify(jwt));
+        this.userSubject.next(jwt);
+    }
+
 
     logout() {
         // remove user from local storage to log user out

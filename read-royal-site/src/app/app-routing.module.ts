@@ -18,7 +18,7 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'admin', component: AdminComponent, canActivate: [AuthGuard], data: {roles : [Role.Admin]} },
   {path: 'profile/:username', component: ProfileComponent},
-  {path: 'account', component: AccountComponent},
+  {path: 'account', component: AccountComponent, canActivate: [AuthGuard], data: {roles : [Role.User]} },
   {path: '', redirectTo: '/home', pathMatch: 'full'}
   // {path: '**', redirectTo: '/home'}
   

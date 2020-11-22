@@ -18,6 +18,8 @@ import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/c
 import { AdminComponent } from './admin';
 import { ProfileComponent } from './profile/profile.component';
 import { AccountComponent } from './account/account.component';
+import { StoriesComponent } from './stories/stories.component';
+import {FileUploadModule} from 'primeng/fileupload'
 
 
 @NgModule({
@@ -29,7 +31,8 @@ import { AccountComponent } from './account/account.component';
     RegisterComponent,
     AdminComponent,
     ProfileComponent,
-    AccountComponent
+    AccountComponent,
+    StoriesComponent
   ],
   imports: [
     CommonModule,
@@ -41,6 +44,7 @@ import { AccountComponent } from './account/account.component';
     MatToolbarModule,
     HttpClientModule,
     MatFormFieldModule,
+    FileUploadModule,
     FormsModule,
     ReactiveFormsModule
   ], exports : [

@@ -1,3 +1,4 @@
+
 <div class="col-md-6 offset-md-3 mt-5">
    
     <div style="display: flex; justify-content: center;">
@@ -5,10 +6,16 @@
     </div>
     <div class="card">
        
+       
         <div class="card-body">
-            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()"></form>
-        
-                <div class="formgroup"> 
+             <label>Avatar image</label>
+            <p-fileUpload name="image[]" customUpload="true" (uploadHandler)="FileUpload($event)"
+            accept="image/*" maxFileSize="1000000">
+            <ng-template pTemplate="content">
+            </ng-template>
+    </p-fileUpload>    
+     
+                <!-- <div class="formgroup"> 
                     <label>Avatar image</label>
                     <div style="display: flex;"> 
                        
@@ -21,38 +28,57 @@
                           </button>
                         </div>
                     </div>
-                        </div>
-                <div class="form-group">
+                        </div> -->
+                     
+                        <form [formGroup]="usernameForm" (ngSubmit)="onUsernameUpload()">
+                        <div class="form-group">
                     <label for="username">Username</label>
+                    <div style="display: flex;"> 
                     <input type="text"minlength="5" value="{{this.profileView.username}}" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+                    <button>Uploads</button>
+                </div>
+                <div *ngIf="usernameError" class="alert alert-danger mt-3 mb-0">{{usernameError}}</div>
                     <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                        <div *ngIf="f.username.errors.required">Username is required</div>
                         <div *ngIf="f.username.errors?.pattern">Use only numbers or letters, no special characters allowed</div>
                         <div *ngIf = "f.username.errors?.minlength"> Username should at least be 5 characters long</div>
                     </div>
+                   
                 </div>
             
+            </form>
+            <form [formGroup]="descriptionForm" (ngSubmit)="onDescriptionUpload()">
                 <div class="form-group">
+            <label for="username">Bio</label>
+            <div style="display: flex;">
+            <textarea rows="4" cols="50" style="resize: none; width : 820px;" name="description"  formControlName="description">
+         
+            </textarea>
+           <div><button style="height: 38px; width: 68px;">Upload</button> </div> 
+        </div>          
+        </div>
+    </form>
+
+                <!-- <div class="form-group">
                     <label for="email">Email</label>
-                  <input type="email" formControlName="email" value="{{this.profileView.email}}" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                  <input type="email" formControlName="email" value="{{this.profileView.email}}" class="form-control"/>
                   <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                       <div *ngIf="f.email.errors.required">Email is required</div>
                   </div>
               </div>
               <div class="form-group">
                 <label for="bio">Description</label>
-              <input type="password" formControlName="bio"  value="{{this.profileView.description}}" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.bio.errors }" />
+              <input type="password" formControlName="bio"  value="{{this.profileView.description}}" class="form-control"/>
               <div *ngIf="submitted && f.bio.errors" class="invalid-feedback">
              
               </div>
-          </div>
+          </div> -->
                 
                 <button  class="btn btn-primary">
                     <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                     Change account details
                 </button>
                 <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
-            </form>
+            
         </div>
     </div>
 </div>            
