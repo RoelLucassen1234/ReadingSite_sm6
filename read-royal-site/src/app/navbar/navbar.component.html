@@ -2,10 +2,13 @@
     <span>My Application</span>
 <div class="spacer"></div>
 
-    <a [routerLink]="'/home'" mat-button > Home </a>
-    <a [routerLink]= "['/profile', 1]" mat-button > Home </a>
+<a [routerLink]="'/home'" mat-button > Home </a>
+<a [routerLink]= "['/profile', 1]" mat-button > Unfinished Stat Page  </a>
+   
     <a *ngIf="this.verified && this.isRole == 'Admin' " mat-button [routerLink]="'/admin'"> Admin Controls </a>
     <a *ngIf="this.verified" mat-button  [routerLink]="'/login'"> Your stories </a>
+    <a *ngIf="this.verified" mat-button  [routerLink]="'/account'"> Your Account </a>
+   
     <a *ngIf="this.verified && this.isRole == 'User' " mat-button  [routerLink]="'/login'"> Followed Stories </a>
     <a *ngIf="!this.verified" mat-raised-button color="accent" [routerLink]="'/login'"> Login </a>
     <a *ngIf="this.verified" mat-raised-button color="accent" (click)="logout()" [routerLink]="'/home'">Log out </a>

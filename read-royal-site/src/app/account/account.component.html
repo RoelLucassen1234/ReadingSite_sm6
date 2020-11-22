@@ -35,7 +35,7 @@
                     <label for="username">Username</label>
                     <div style="display: flex;"> 
                     <input type="text"minlength="5" value="{{this.profileView.username}}" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
-                    <button>Uploads</button>
+                    <button>Update</button>
                 </div>
                 <div *ngIf="usernameError" class="alert alert-danger mt-3 mb-0">{{usernameError}}</div>
                     <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
@@ -53,7 +53,7 @@
             <textarea rows="4" cols="50" style="resize: none; width : 820px;" name="description"  formControlName="description">
          
             </textarea>
-           <div><button style="height: 38px; width: 68px;">Upload</button> </div> 
+           <div><button style="height: 38px; width: 68px;">Update</button> </div> 
         </div>          
         </div>
     </form>
