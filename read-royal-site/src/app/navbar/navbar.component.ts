@@ -25,7 +25,7 @@ export class NavbarComponent implements OnInit {
 }
 
   isVerifiedUser(){
-    this.filtersLoaded = Promise.resolve(false);
+   
     if (this.authenticationservice.userValue != null){
       const user = this.authenticationservice.userValue;
       this.isRole = user.role;

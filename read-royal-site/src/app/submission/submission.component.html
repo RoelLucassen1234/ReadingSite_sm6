@@ -1,0 +1,47 @@
+<body>
+    <div  *ngIf="url"><img [src]="url" style="width: 300px; height: 400px;"></div> 
+    <div class="container">
+ <div class="row"> 
+        <form [formGroup]="someForm" (ngSubmit)="submitFunc()">
+
+            <div class="form-group">
+                <label class="fieldName">Fiction Cover:</label>
+                <div class="formInput">
+                    <p-fileUpload mode="basic" name="image[]"  accept="image/*" maxFileSize="1000000" customUpload="true" (uploadHandler)="imagesPreview($event)" auto="true" ></p-fileUpload>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="fieldName" for=""fictionName>Fiction Name:</label>
+                <div class="formInput">
+                    <input type="text" formControlName="fictionName"  minlength="5" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="fieldName"for="description">Fiction Description:</label>
+                <div class="formInput">
+                    <textarea rows="4" cols="50" style="resize: none; width : 400px; height: 160px;" name="description"  formControlName="description"> </textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="fieldName" for="chapterName">Chapter name:</label>
+                <div class="formInput">
+                    <input type="text" formControlName="chapterName"  minlength="5" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                
+                <label class="fieldName" for="chapterName">Chapter content:</label>
+                <div class="formInput">
+                    <quill-editor [style]="editorStyle" [modules]="config" formControlName="editor"></quill-editor>
+                </div>
+            </div>
+           
+            <div class="submitButton" > <button type="submit" class="btn btn-success"> Submit </button></div>        
+          </form>
+         
+          
+    </div>
+   
+    
+</div>
+</body>

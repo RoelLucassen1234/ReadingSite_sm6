@@ -19,7 +19,9 @@ import { AdminComponent } from './admin';
 import { ProfileComponent } from './profile/profile.component';
 import { AccountComponent } from './account/account.component';
 import { StoriesComponent } from './stories/stories.component';
-import {FileUploadModule} from 'primeng/fileupload'
+import {FileUploadModule} from 'primeng/fileupload';
+import { SubmissionComponent } from './submission/submission.component'
+import {QuillModule} from 'ngx-quill'
 
 
 @NgModule({
@@ -32,11 +34,13 @@ import {FileUploadModule} from 'primeng/fileupload'
     AdminComponent,
     ProfileComponent,
     AccountComponent,
-    StoriesComponent
+    StoriesComponent,
+    SubmissionComponent
   ],
   imports: [
     CommonModule,
     BrowserModule,
+    QuillModule.forRoot(),
     RouterModule,
     AppRoutingModule,
     BrowserAnimationsModule,

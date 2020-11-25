@@ -49,7 +49,7 @@ this.profileView.username = data.username;
 this.profileView.description = data.description;
 this.profileView.image64 = data.image64;
 this.profileView.email = data.email;
-
+console.log(data);
 this.readImage(data.image64);
 this.g.description.setValue(data.description);
 console.log(this.profileView);
@@ -60,16 +60,18 @@ console.log(this.profileView);
 
   onDescriptionUpload(){
 	this.submittedBio = true;
-	console.log(this.g.description.value);
+	
 	
 	if (this.descriptionForm.invalid) {
 		return;
 	}
+	console.log(this.g.description.value);
 	var swap = new BioSwap();
 	swap.jwt = this.authentication.userValue.token;
 	swap.description = this.g.description.value;
 
 	this.profileService.saveBio(swap).subscribe(data => {
+		console.log("Succesfull")
 		this.bioError = 'Succesfully updated description'
 			},
 			err => {
