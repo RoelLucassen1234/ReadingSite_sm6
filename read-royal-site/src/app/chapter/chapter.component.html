@@ -1,10 +1,10 @@
 <body class="body">
 <div class="content">
     <div class="context">
-        <label class="title">Chapter Name </label>
-        <div class="chapterPart">
-          <label class="chapterTitle"> <b> Fiction title </b> </label>
-          <div class="chapterContext" [innerHTML]="content"></div>
+        <label class="chapterTitle"> <b>{{chapter.fictionTitle}}</b>   </label>
+        <div st class="chapterPart">
+          <label class="title"> <b> {{chapter.chapterTitle}}  </b> </label>
+          <div class="chapterContext" [innerHTML]="chapter.content"></div>
 
         </div>
     </div>
