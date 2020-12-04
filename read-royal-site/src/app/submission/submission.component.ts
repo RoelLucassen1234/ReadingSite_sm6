@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthenticationService } from '../services/authentication.service';
+import { StoriesService } from '../services/stories-service.service';
 
 @Component({
   selector: 'app-submission',
@@ -11,6 +13,9 @@ export class SubmissionComponent implements OnInit {
   someForm: FormGroup;
   currentFile: File;
   url;
+  submitted : Boolean = false;
+  minChapterContent : Boolean = false;
+  submittedImage = false;
   
   editorStyle = {
     height: '140px'
@@ -26,17 +31,16 @@ export class SubmissionComponent implements OnInit {
     ]
   }
 
+  get f() { return this.someForm.controls; }
 
 
 
 
 
-
-  constructor( private formBuilder: FormBuilder) { 
+  constructor(private fictionService : StoriesService,private authentication : AuthenticationService, private formBuilder: FormBuilder) { 
     this.someForm = this.formBuilder.group({
       fictionName: ['', Validators.required],
       description: ['', Validators.required],
-      fictionCover: ['', Validators.required],
       chapterName: ['',   Validators.required],
       editor: ['', Validators.required]
 
@@ -63,7 +67,50 @@ export class SubmissionComponent implements OnInit {
 }
 
 submitFunc(){
-console.log(this.someForm.get("editor").value)
+
+this.submitted = true;
+
+if (this.someForm.invalid) {
+  return;
+}
+
+
+const formData = new FormData();
+formData.append('fictionImage', this.url);
+formData.append('fictionTitle', this.someForm.get("fictionName").value);
+formData.append('fictionDescription', this.someForm.get("description").value);
+formData.append('chapterTitle', this.someForm.get("chapterName").value);
+formData.append('chapterContent', this.someForm.get("editor").value);
+formData.append('jwt', this.authentication.userValue.token);
+
+this.fictionService.createFiction(formData).subscribe(data =>
+  {
+    // GO TO Fiction. make a page
+  }, err =>
+  {
+    console.log(err);
+  }
+
+  )
+
+
+
+}
+
+
+maxLength(event){
+if(event.editor.getLength() > 10000){
+event.editor.deleteText(10000, event.editor.getLength())
+}
+else if (event.editor.getLength() < 10) {
+  this.minChapterContent = true;
+}else{
+  this.minChapterContent = false; 
+}
+}
+
+quillValidation(){
+
 }
 
 save(): void {

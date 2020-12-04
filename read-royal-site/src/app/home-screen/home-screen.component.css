@@ -1,10 +1,32 @@
 .container{
     margin-top: 20px;
-    width: 80%; 
+    /* width: 80%;  */
     height: fit-content;
-    background-color: grey;
+    /* background-color: grey; */
     
 }
+
+
+.fictionsClass{
+    width: 500px;
+    text-align: center;
+}
+
+.th, td, tr{
+   width: 80px;
+padding: 5px;
+}
+
+
+.table th {
+    text-align: center;
+    width: 80px;
+padding: 4px;
+}
+
+.thead th{
+    text-align: center;
+} */
 
 
 

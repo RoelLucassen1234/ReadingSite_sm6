@@ -1,0 +1,60 @@
+.body {
+
+    background: linear-gradient(170deg, rgba(49, 57, 73, 0.8) 20%, rgba(49, 57, 73, 0.5) 20%, rgba(49, 57, 73, 0.5) 35%, rgba(41, 48, 61, 0.6) 35%, rgba(41, 48, 61, 0.8) 45%, rgba(31, 36, 46, 0.5) 45%, rgba(31, 36, 46, 0.8) 75%, rgba(49, 57, 73, 0.5) 75%), linear-gradient(45deg, rgba(20, 24, 31, 0.8) 0%, rgba(41, 48, 61, 0.8) 50%, rgba(82, 95, 122, 0.8) 50%, rgba(133, 146, 173, 0.8) 100%) #313949;
+ padding-top: 40px;
+
+}
+
+.hidden-content{
+    width: 800px;
+} 
+.hidden-content p{
+    width: 780px;
+} 
+
+.descriptionTitle{
+    margin-left: 330px;
+    display: block;
+    width: fit-content;
+}
+
+.fictionInfo {
+    background-color: lightskyblue;
+   
+    height: fit-content;
+    width: fit-content;
+    margin: auto;
+}
+.description{
+    padding-left: 25px;
+}
+
+.chapters{
+    text-align: center;
+    background-color: lightskyblue;
+    height: fit-content;
+    width: 812px;
+    margin: 20px 0px 0px 664px;
+    padding-bottom: 20px;
+
+}
+.chapterRow{
+    justify-content: center;
+    display: flex;
+   
+}
+.table{
+    width: 500px;
+}
+.tr, td  {
+    width: 200px;
+    height: fit-content;
+    border-top:  1px solid black;
+    border-bottom:  1px solid black;;
+}
+.tr, th{
+    width: 200px;
+    height: fit-content;
+    border:  1px solid black;
+}
+

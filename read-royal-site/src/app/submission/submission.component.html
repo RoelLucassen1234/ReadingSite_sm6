@@ -1,47 +1,74 @@
 <body>
-    <div  *ngIf="url"><img [src]="url" style="width: 300px; height: 400px;"></div> 
-    <div class="container">
+   
+    <div class="container" style="padding-top: 20px;">
  <div class="row"> 
         <form [formGroup]="someForm" (ngSubmit)="submitFunc()">
 
             <div class="form-group">
                 <label class="fieldName">Fiction Cover:</label>
-                <div class="formInput">
+               
                     <p-fileUpload mode="basic" name="image[]"  accept="image/*" maxFileSize="1000000" customUpload="true" (uploadHandler)="imagesPreview($event)" auto="true" ></p-fileUpload>
-                </div>
+                    <div  *ngIf="url"><img [src]="url" style="width: 100px; height: 120px; padding-top: 10px;"></div> 
+                <div *ngIf="submittedImage">Image is required</div>
             </div>
             <div class="form-group">
                 <label class="fieldName" for=""fictionName>Fiction Name:</label>
-                <div class="formInput">
-                    <input type="text" formControlName="fictionName"  minlength="5" class="form-control">
-                </div>
+             
+                    <input type="text" formControlName="fictionName"  minlength="5" maxlength="80" class="form-control"[ngClass]="{ 'is-invalid': submitted && f.fictionName.errors }">
+                    <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                        <!-- <div *ngIf="f.fictionName.errors.required">Fiction Name is required</div> -->
+                         <div *ngIf = "f.fictionName.errors?.minlength && !f.fictionName.errors.required"> Fiction Name should at least be 20 characters long</div>
+                         <div *ngIf = "f.fictionName.errors?.required">Fiction name is required</div>
+                         <div *ngIf = "f.fictionName.errors?.maxlength && !f.fictionName.errors.required">Fiction Name should at most be 80 characters long</div>
+                    </div>
+          
             </div>
             <div class="form-group">
                 <label class="fieldName"for="description">Fiction Description:</label>
-                <div class="formInput">
-                    <textarea rows="4" cols="50" style="resize: none; width : 400px; height: 160px;" name="description"  formControlName="description"> </textarea>
-                </div>
+               <div></div>
+                    <textarea rows="4" cols="50" style="resize: none; width : 400px; height: 160px;" minlength="20" maxlength="400" name="description"  formControlName="description"  [ngClass]="{ 'is-invalid': submitted && f.description.errors }"> </textarea>
+                    <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                        <div *ngIf="f.description.errors.required">Fiction Summary is required</div>
+                         <div *ngIf = "f.description.errors?.minlength && !f.description.errors.required"> Fiction summary should at least be 20 characters long</div>
+                         <div *ngIf = "f.description.errors?.maxlength && !f.description.errors.required"> Fiction summary should at most be 400 characters long</div>
+                    </div>
+             
             </div>
             <div class="form-group">
                 <label class="fieldName" for="chapterName">Chapter name:</label>
-                <div class="formInput">
-                    <input type="text" formControlName="chapterName"  minlength="5" class="form-control">
-                </div>
+             
+                    <input type="text" formControlName="chapterName"  minlength="5" class="form-control"  [ngClass]="{ 'is-invalid': submitted && f.chapterName.errors }">
+                    <div *ngIf="submitted && f.chapterName.errors" class="invalid-feedback">
+                        <div *ngIf="f.chapterName.errors.required">Chapter name is required</div>
+                         <div *ngIf = "f.chapterName.errors?.minlength && !f.chapterName.errors.required"> Chapter name should at least be 5 characters long</div>
+                    </div>
+                    
+               
             </div>
             <div class="form-group">
-                
                 <label class="fieldName" for="chapterName">Chapter content:</label>
-                <div class="formInput">
-                    <quill-editor [style]="editorStyle" [modules]="config" formControlName="editor"></quill-editor>
+                <div *ngIf="minChapterContent" style="font-size: 80%; color: #dc3545;">Chapter content needs more characters</div>
+          
+                <div *ngIf="submitted && f.editor.errors">
+                    <div *ngIf="f.editor.errors.required" style="font-size: 80%;
+                    color: #dc3545;">Chapter content is required</div>
                 </div>
+               <div class="formInput"> 
+                    <quill-editor [style]="editorStyle" [modules]="config" (onContentChanged)="maxLength($event)" formControlName="editor"></quill-editor>
+                </div>
+               
             </div>
+          
+              
            
-            <div class="submitButton" > <button type="submit" class="btn btn-success"> Submit </button></div>        
+           <div class="form-group">
+          <button type="submit"style="margin-top:40px" class="btn btn-success"> Submit </button>
+           </div>       
           </form>
-         
+       
           
     </div>
-   
+    
     
 </div>
 </body>

@@ -1,0 +1,22 @@
+.context{
+    background: darkgrey;
+    width: 850px;
+    margin: auto;
+}
+
+.title{
+    display: flex;
+    justify-content: center;
+    font-size: x-large;
+    font-weight: 700;
+}
+
+.chapterTitle{
+    display: flex;
+    justify-content: center;
+}
+
+.chapterContext{
+    padding-left: 30px;
+    padding-right: 30px;
+}

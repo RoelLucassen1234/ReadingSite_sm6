@@ -21,7 +21,9 @@ import { AccountComponent } from './account/account.component';
 import { StoriesComponent } from './stories/stories.component';
 import {FileUploadModule} from 'primeng/fileupload';
 import { SubmissionComponent } from './submission/submission.component'
-import {QuillModule} from 'ngx-quill'
+import {QuillModule} from 'ngx-quill';
+import { FictionComponent } from './fiction/fiction.component';
+import { ChapterComponent } from './chapter/chapter.component'
 
 
 @NgModule({
@@ -35,7 +37,9 @@ import {QuillModule} from 'ngx-quill'
     ProfileComponent,
     AccountComponent,
     StoriesComponent,
-    SubmissionComponent
+    SubmissionComponent,
+    FictionComponent,
+    ChapterComponent
   ],
   imports: [
     CommonModule,

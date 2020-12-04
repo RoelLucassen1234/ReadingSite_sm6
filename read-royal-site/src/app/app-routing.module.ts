@@ -10,6 +10,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { AccountComponent } from './account/account.component';
 import { StoriesComponent } from './stories/stories.component';
 import { SubmissionComponent } from './submission/submission.component';
+import { FictionService } from './services/fiction.service';
+import { FictionComponent } from './fiction/fiction.component';
+import { ChapterComponent } from './chapter/chapter.component';
 
 const routes: Routes = [
  // {path: '404', component: NotFoundComponent},
@@ -17,6 +20,8 @@ const routes: Routes = [
   {path: 'home' , component: HomeScreenComponent},
    {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
+  {path: 'fiction/:id', component: FictionComponent},
+  {path: 'chapter', component: ChapterComponent},
   {path: 'admin', component: AdminComponent, canActivate: [AuthGuard], data: {roles : [Role.Admin]} },
   {path: 'profile/:username', component: ProfileComponent},
   {path: 'my',

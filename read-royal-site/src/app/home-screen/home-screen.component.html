@@ -3,8 +3,27 @@
 
 <div class="container">
 
+
+
+
+    <div class="fictionsClass">
+        <label style="font-size:large;">All fictions</label>
+        <table>
+         <th style="text-align: center;">Title</th>
+                <th style="text-align: center;">Author</th>
+                <th style="text-align: center;">Amount of Chapters</th>
+            
+            <tbody>
+                <tr *ngFor="let fiction of fictons">
+                    <td ><a [routerLink]= "['/fiction', fiction.id]">{{fiction.title}} </a> </td>
+                    <td>{{fiction.author}}</td>
+                    <td>{{fiction.amountOfChapters}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
     
-    <div class="randomStories" > 
+    <!-- <div class="randomStories" > 
         <span class="spacer">Random stories</span>      
      
      <div class="centering">
@@ -68,7 +87,7 @@
      </div>
     </div>
     </div>
-      
+       -->
  
 
 

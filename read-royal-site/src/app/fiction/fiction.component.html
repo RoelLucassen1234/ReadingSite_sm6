@@ -1,0 +1,59 @@
+<html>
+<body class="body">
+<div class="fictionInfo">
+    <div class="portlet light row" style="min-height: 180px;">
+        <div style="display: flex; justify-content: flex-end;">
+          
+            <img  style="width: 250px; height: 375px;" src="https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png">
+
+        </div>
+        <div >
+    
+        
+            <div class="description">
+                <div class="descriptionTitle"> 
+            
+                    <div style="padding: 0px; margin: 0px;"> <label style="padding: 0px; margin: 0px;"><b>{{fiction.title}}  </b></label></div>
+                    <!-- <label style="padding: 0px; margin: 0px;"> By {{fiction.author}}</label> -->
+                </div>
+                <div class="hidden-content" property="description">
+                    <p>{{fiction.description}}</p>
+                </div>
+            
+            </div>
+
+
+          
+    </div>
+    
+</div>
+
+</div>
+<div class="chapters">
+    <div class="chapterscontent">
+    
+        <span>Table of Contents</span>
+
+</div>
+<div class="chapterRow">
+    <div > 
+      <table>
+        <thead>
+       <tr>
+           <th>Chapter name</th>
+       </tr>
+        </thead>
+        <tbody>
+            <tr class="odd" *ngFor="let chapter of chapters">
+              <th> <a [routerLink]= "['/chapter', chapter.id]">{{chapter.title}} </a> </th>
+           </tr>
+         
+          </tbody>
+    </table> 
+</div>
+</div>    
+</div>
+
+
+</body>
+</html>
