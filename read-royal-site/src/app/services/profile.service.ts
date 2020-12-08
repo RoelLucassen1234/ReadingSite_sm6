@@ -29,7 +29,8 @@ export class ProfileService {
     }
 
     saveAvatarImage(swap : AvatarSwap) {
-        return this.http.post<any>(`${environment.apiUrl}/profile/edit/avatar`, swap)
+    console.log("Hello");
+      return this.http.post<any>(`${environment.apiUrl}/profile/edit/avatar`, swap)
 
       }
       saveUsername(swap : UsernameSwap) {

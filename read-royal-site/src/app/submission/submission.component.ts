@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
 import { StoriesService } from '../services/stories-service.service';
 
@@ -11,6 +12,7 @@ import { StoriesService } from '../services/stories-service.service';
 export class SubmissionComponent implements OnInit {
   imageFile: {link: string, file: any, name: string};
   someForm: FormGroup;
+  error: string = "";
   currentFile: File;
   url;
   submitted : Boolean = false;
@@ -37,7 +39,7 @@ export class SubmissionComponent implements OnInit {
 
 
 
-  constructor(private fictionService : StoriesService,private authentication : AuthenticationService, private formBuilder: FormBuilder) { 
+  constructor(private fictionService : StoriesService,private authentication : AuthenticationService, private formBuilder: FormBuilder, private router:Router) { 
     this.someForm = this.formBuilder.group({
       fictionName: ['', Validators.required],
       description: ['', Validators.required],
@@ -85,16 +87,19 @@ formData.append('jwt', this.authentication.userValue.token);
 
 this.fictionService.createFiction(formData).subscribe(data =>
   {
-    // GO TO Fiction. make a page
+    console.log(data);
+    this.router.navigate(['/home']); // GO TO Fiction. make a page
   }, err =>
   {
-    console.log(err);
+    if(err == "OK"){
+    this.router.navigate(['/home']);
+    }else{
+   this.error = err;
+   console.log(err);
+    };
   }
 
   )
-
-
-
 }
 
 

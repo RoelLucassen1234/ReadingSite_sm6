@@ -49,9 +49,9 @@ this.profileView.username = data.username;
 this.profileView.description = data.description;
 this.profileView.image64 = data.image64;
 this.profileView.email = data.email;
-console.log(data);
 this.readImage(data.image64);
 this.g.description.setValue(data.description);
+this.f.username.setValue(data.username);
 console.log(this.profileView);
 });
 }
@@ -63,6 +63,7 @@ console.log(this.profileView);
 	
 	
 	if (this.descriptionForm.invalid) {
+		this.bioError = "Description cant be empty";
 		return;
 	}
 	console.log(this.g.description.value);
@@ -71,17 +72,18 @@ console.log(this.profileView);
 	swap.description = this.g.description.value;
 
 	this.profileService.saveBio(swap).subscribe(data => {
-		console.log("Succesfull")
+		
 		this.bioError = 'Succesfully updated description'
 			},
 			err => {
 			this.bioError = err;	
 			})
-	console.log(this.bioError);
+	
   }
 
   onUsernameUpload(){
 	  this.submitted = true;
+	  this.usernameError = '';
 
 	  if (this.usernameForm.invalid) {
 		return;
@@ -95,6 +97,7 @@ console.log(this.profileView);
 this.usernameError = 'Succesfully updated username'
 	},
 	err => {
+		console.log(err);
 	this.usernameError = err;	
 	})
 
