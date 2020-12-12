@@ -2,9 +2,9 @@
 <body class="body">
 <div class="fictionInfo">
     <div class="portlet light row" style="min-height: 180px;">
-        <div style="display: flex; justify-content: flex-end;">
+        <div *ngIf="url" style="display: flex; justify-content: flex-end;">
           
-            <img  style="width: 250px; height: 375px;" src="https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png">
+            <img  style="width: 250px; height: 375px;" [src]="url">
 
         </div>
         <div >
@@ -13,7 +13,7 @@
             <div class="description">
                 <div class="descriptionTitle"> 
             
-                    <div style="padding: 0px; margin: 0px;"> <label style="padding: 0px; margin: 0px;"><b>{{fiction.title}}  </b></label></div>
+                    <div style="padding: 0px; margin: 0px;"> <label style="padding: 0px; margin: 0px;"><b>{{fiction.title}}  by {{fiction.author}} </b></label></div>
                     <!-- <label style="padding: 0px; margin: 0px;"> By {{fiction.author}}</label> -->
                 </div>
                 <div class="hidden-content" property="description">

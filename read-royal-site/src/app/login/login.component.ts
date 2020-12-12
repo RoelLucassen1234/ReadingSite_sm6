@@ -6,6 +6,7 @@ import { first } from 'rxjs/operators';
 import { AuthenticationService } from '../services/authentication.service';
 import { LoginModel } from '../models/loginModel';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ReCaptchaV3Service } from 'ng-recaptcha';
 
 @Component({ templateUrl: 'login.component.html' })
 export class LoginComponent implements OnInit {
@@ -15,13 +16,14 @@ export class LoginComponent implements OnInit {
     submitted = false;
     error = '';
     login : LoginModel;
-
+    grecaptcha: any;
     constructor(
-        
+       
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
-        private authenticationService: AuthenticationService
+        private authenticationService: AuthenticationService,
+        private recaptchaV3Service: ReCaptchaV3Service,
         
     ) { 
         // redirect to home if already logged in
@@ -35,25 +37,30 @@ export class LoginComponent implements OnInit {
     ngOnInit() {
         this.loginForm = this.formBuilder.group({
             username: ['', Validators.compose( [Validators.required, Validators.pattern("^([A-Za-z0-9\-\_]+)")])],
-            password: ['', Validators.required]
+            password: ['', Validators.required],
+            captcha: ['']
         });
     }
 
     // convenience getter for easy access to form fields
     get f() { return this.loginForm.controls; }
 
+
+
     onSubmit() {
     
+       
         this.changePage = false;
         this.submitted = true;
+        
 
         // stop here if form is invalid
         if (this.loginForm.invalid) {
             return;
         }
 
-        this.loading = true;
-        this.authenticationService.login(this.f.username.value, this.f.password.value)
+        this.recaptchaV3Service.execute('Login').subscribe((token) => {
+            this.authenticationService.login(this.f.username.value, this.f.password.value, token)
             .pipe(first())
             .subscribe({
                 next: () => {
@@ -70,5 +77,11 @@ export class LoginComponent implements OnInit {
             });
 
           
+        });
+    
+
+        console.log(this.f.captcha.value);
+        this.loading = true;
+       
     }
 }

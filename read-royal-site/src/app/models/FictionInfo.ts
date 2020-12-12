@@ -5,6 +5,6 @@ export class FictionInfo {
     author: string;
     title : String; 
     description : string;
-    image : string;
+    cover : string;
     chapters : BaseChapter[];
 }

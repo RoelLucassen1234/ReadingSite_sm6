@@ -1,6 +1,7 @@
 <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
 <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'></script>
 
+<body class="body"> 
 <div class="container">
 
 
@@ -13,15 +14,18 @@
                 <th style="text-align: center;">Author</th>
                 <th style="text-align: center;">Amount of Chapters</th>
             
-            <tbody>
+         
                 <tr *ngFor="let fiction of fictons">
                     <td ><a [routerLink]= "['/fiction', fiction.id]">{{fiction.title}} </a> </td>
                     <td>{{fiction.author}}</td>
                     <td>{{fiction.amountOfChapters}}</td>
                 </tr>
-            </tbody>
+         
         </table>
     </div>
+    </div>
+
+</body>
     
     <!-- <div class="randomStories" > 
         <span class="spacer">Random stories</span>      
@@ -89,40 +93,3 @@
     </div>
        -->
  
-
-
-<script src="assets/script/customslider.js"></script>
-<script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
-<!--Initialize Bootstrap Carousel-->
-
-<script>
- 
-        
-    /*
-        CC 2.0 License Iatek LLC 2018 - Attribution required
-    */
-    var $e = $(e.relatedTarget);
-    var idx = $e.index();
-    var itemsPerSlide = 5;
-    var totalItems = $('.carousel-item').length;
- 
-    if (idx >= totalItems-(itemsPerSlide-1)) {
-        var it = itemsPerSlide - (totalItems - idx);
-        for (var i=0; i<it; i++) {
-            // append slides to end
-            if (e.direction=="left") {
-                $('.carousel-item').eq(i).appendTo('.carousel-inner');
-            }
-            else {
-                $('.carousel-item').eq(0).appendTo('.carousel-inner');
-            }
-        }
-    }
-
- 
-
-
-    </script>

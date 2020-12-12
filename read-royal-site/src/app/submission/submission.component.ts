@@ -60,9 +60,9 @@ export class SubmissionComponent implements OnInit {
 	this.currentFile = event.files[0];
 	reader.readAsDataURL(event.files[0]);
 	reader.onload = (_event) => {
-		console.log("WAAAAAAAH");
-		this.url = reader.result;
-  
+
+		this.url = reader.result.toString();
+    console.log(this.url);
   }
    
     

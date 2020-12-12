@@ -1,14 +1,15 @@
-﻿<div class="col-md-6 offset-md-3 mt-5">
-    <div class="alert alert-info">
-   
-    </div>
+﻿<body style="background: linear-gradient(170deg, rgba(49, 57, 73, 0.8) 20%, rgba(49, 57, 73, 0.5) 20%, rgba(49, 57, 73, 0.5) 35%, rgba(41, 48, 61, 0.6) 35%, rgba(41, 48, 61, 0.8) 45%, rgba(31, 36, 46, 0.5) 45%, rgba(31, 36, 46, 0.8) 75%, rgba(49, 57, 73, 0.5) 75%), linear-gradient(45deg, rgba(20, 24, 31, 0.8) 0%, rgba(41, 48, 61, 0.8) 50%, rgba(82, 95, 122, 0.8) 50%, rgba(133, 146, 173, 0.8) 100%) #313949;">
+
+
+<div class="col-md-6 offset-md-3 mt-5">
+
     <div class="card">
        
         <div class="card-body">
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text"minlength="5" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+                    <input type="text"minlength="5" formControlName="username" class="form-control"  />
                     <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
                         <div *ngIf="f.username.errors.required">Username is required</div>
                         <div *ngIf="f.username.errors?.pattern">Use only numbers or letters, no special characters allowed</div>
@@ -17,20 +18,24 @@
                 </div>
                 <div class="form-group">
                       <label for="password">Password</label>
-                    <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                    <input type="password" formControlName="password" class="form-control" />
                     <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                         <div *ngIf="f.password.errors.required">Password is required</div>
                     </div>
                 </div>
-                
-                <button [disabled]="loading" class="btn btn-primary">
+                <input type="hidden"  id="captchatoken" name="captchatoken" formControlName="captcha" size="1" value=""/>
+                <button  [disabled]="loading" class="btn btn-primary">
                     <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                     Login
                 </button>
-                <a  [routerLink]="'/register'" style="margin-left: 50px;">dont have an account? click here</a>
+                <a style="margin-left: 50px;" [routerLink]="'/register'">dont have an account? click here</a>
                
                 <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
             </form>
         </div>
     </div>
 </div>            
+</body>
+<script src="https://www.google.com/recaptcha/api.js?render=6LdHbv8ZAAAAAFblM1nZQ5oMD2tRv-rXsmQ4dsD2"></script>
+
+

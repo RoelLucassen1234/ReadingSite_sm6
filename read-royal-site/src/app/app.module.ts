@@ -24,6 +24,7 @@ import { SubmissionComponent } from './submission/submission.component'
 import {QuillModule} from 'ngx-quill';
 import { FictionComponent } from './fiction/fiction.component';
 import { ChapterComponent } from './chapter/chapter.component'
+import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from 'ng-recaptcha';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { ChapterComponent } from './chapter/chapter.component'
     ChapterComponent
   ],
   imports: [
+    RecaptchaV3Module,
     CommonModule,
     BrowserModule,
     QuillModule.forRoot(),
@@ -63,6 +65,7 @@ import { ChapterComponent } from './chapter/chapter.component'
     {provide: LocationStrategy, useClass: HashLocationStrategy},
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: RECAPTCHA_V3_SITE_KEY, useValue: '6LdHbv8ZAAAAAFblM1nZQ5oMD2tRv-rXsmQ4dsD2' },
 
     // provider used to create fake backend
     //fakeBackendProvider

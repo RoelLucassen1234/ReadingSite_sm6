@@ -12,6 +12,7 @@ import { StoriesService } from '../services/stories-service.service';
 export class FictionComponent implements OnInit {
  fiction : FictionInfo;
  chapters: BaseChapter[];
+ url;
  id : String;
   constructor(private route: ActivatedRoute, private storyService : StoriesService) {
 
@@ -28,6 +29,8 @@ export class FictionComponent implements OnInit {
   getFiction(id : String){
     this.storyService.getFiction(id).subscribe(data => {
     this.fiction = data;
+    this.url = this.fiction.cover;
+    console.log(this.url);
     this.chapters = this.fiction.chapters;
       console.log(this.fiction);
          }, err => {
